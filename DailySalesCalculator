@@ -29,7 +29,7 @@ class PhoneItem extends SalesItem {
 
     @Override
     public String getDetails() {
-        return String.format("Phone Details:%nName: %s%nPrice: ₱%.2f%nQuantity: %d%nTotal: ₱%.2f%n",
+        return String.format("Phone Details%nName: %s%nPrice: ₱%.2f%nQuantity: %d%nTotal: ₱%.2f%n",
                 itemName, price, quantity, calculateTotal());
     }
 }
@@ -49,7 +49,7 @@ class RepairServiceItem extends SalesItem {
 
     @Override
     public String getDetails() {
-        return String.format("Repair Service Details:%nService: %s%nHourly Rate: ₱%.2f%nHours Worked: %d%nTotal: ₱%.2f%n",
+        return String.format("Repair Service Details%nService: %s%nHourly Rate: ₱%.2f%nHours Worked: %d%nTotal: ₱%.2f%n",
                 itemName, price, hoursWorked, calculateTotal());
     }
 }
@@ -64,7 +64,7 @@ public class DailySalesCalculator extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-    
+        // Input panel
         JPanel inputPanel = new JPanel(new GridLayout(6, 2, 10, 10));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Enter Sales Details"));
 
@@ -92,22 +92,22 @@ public class DailySalesCalculator extends JFrame {
         serviceHoursInput = new JTextField("5");
         inputPanel.add(serviceHoursInput);
 
-        
+        // Button panel
         JPanel buttonPanel = new JPanel();
         JButton calculateButton = new JButton("Calculate Total");
         buttonPanel.add(calculateButton);
 
-       
+        // Output area
         outputArea = new JTextArea(10, 30);
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
 
-      
+        // Add to frame
         add(inputPanel, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
 
-       
+        // Button action using lambda expression
         calculateButton.addActionListener(e -> calculateSales());
 
         pack();
