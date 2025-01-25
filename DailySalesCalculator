@@ -64,7 +64,6 @@ public class DailySalesCalculator extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        // Input panel
         JPanel inputPanel = new JPanel(new GridLayout(6, 2, 10, 10));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Enter Sales Details"));
 
@@ -92,22 +91,18 @@ public class DailySalesCalculator extends JFrame {
         serviceHoursInput = new JTextField("5");
         inputPanel.add(serviceHoursInput);
 
-        // Button panel
         JPanel buttonPanel = new JPanel();
         JButton calculateButton = new JButton("Calculate Total");
         buttonPanel.add(calculateButton);
 
-        // Output area
         outputArea = new JTextArea(10, 30);
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
 
-        // Add to frame
         add(inputPanel, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
 
-        // Button action using lambda expression
         calculateButton.addActionListener(e -> calculateSales());
 
         pack();
@@ -116,7 +111,6 @@ public class DailySalesCalculator extends JFrame {
 
     private void calculateSales() {
         try {
-            // Get input data
             String phoneName = phoneNameInput.getText();
             double phonePrice = Double.parseDouble(phonePriceInput.getText());
             int phoneQuantity = Integer.parseInt(phoneQuantityInput.getText());
@@ -125,14 +119,11 @@ public class DailySalesCalculator extends JFrame {
             double hourlyRate = Double.parseDouble(serviceRateInput.getText());
             int hoursWorked = Integer.parseInt(serviceHoursInput.getText());
 
-            // Create items
             PhoneItem phone = new PhoneItem(phoneName, phonePrice, phoneQuantity);
             RepairServiceItem service = new RepairServiceItem(serviceName, hourlyRate, hoursWorked);
 
-            // Calculate totals
             double totalSales = phone.calculateTotal() + service.calculateTotal();
 
-            // Display results
             String result = phone.getDetails() + "\n" +
                     service.getDetails() + "\n" +
                     String.format("Total Daily Sales: ₱%.2f", totalSales);
